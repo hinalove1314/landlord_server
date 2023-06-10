@@ -1,8 +1,7 @@
 package main
 
 import (
-	"my_landlord/service"
-
+	"my_landlord/controllers"
 	"github.com/astaxie/beego/logs"
 )
 
@@ -30,7 +29,7 @@ func main() {
 
 	//client:=&service.Client{}
 	//无限循环来建立TCP连接?
-	service.ConnectClient() //建立TCP连接
+	controllers.ConnectClient() //建立TCP连接
 
 	// for {
 	// 	conn, err := listen.Accept()

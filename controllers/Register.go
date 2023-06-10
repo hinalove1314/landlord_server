@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"encoding/json"
 	"my_landlord/common"
-	"my_landlord/service"
 	"time"
 
 	"github.com/astaxie/beego/logs"
@@ -15,7 +14,7 @@ var (
 )
 
 // 可以直接传一个连接，也可以传一个buffer，待修改
-func Register(msg []byte, client *service.Client) {
+func Register(msg []byte, client *Client) {
 	err := json.Unmarshal(msg, &LogInfo)
 	if err != nil {
 		logs.Error("Error parsing JSON:", err)
@@ -27,10 +26,6 @@ func Register(msg []byte, client *service.Client) {
 
 	var username, password string
 	err = common.GameConfInfo.Db.QueryRow("SELECT username FROM account where username=?", LogInfo.Account).Scan(&username, &password)
-
-	// Use LoginResponseInfo instead of LoginResponse
-	LogInfo.Account = LogInfo.Account
-	LogInfo.Password = LogInfo.Password
 
 	if err != nil && err != sql.ErrNoRows { //账号已存在
 		print("账号已存在")
