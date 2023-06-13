@@ -17,7 +17,6 @@ var netCode struct {
 	Value int `json:"value"`
 }
 
-
 func HandleRequest(client *Client) {
 	fmt.Println("HandleRequest")
 	for {
@@ -72,7 +71,8 @@ func HandleRequest(client *Client) {
 }
 
 func sendResponse(response interface{}, netCode int, client *Client) {
-	println("sendResponse")
+	fmt.Println("sendResponse start")
+
 	jsonData, err := json.Marshal(response)
 	if err != nil {
 		logs.Error("Error marshalling JSON:", err)
@@ -81,15 +81,20 @@ func sendResponse(response interface{}, netCode int, client *Client) {
 
 	// prepare the data to send
 	length := len(jsonData)
-	println("length=%v", length)
+	fmt.Printf("length: %v\n", length)
+
 	data := make([]byte, 4+4+len(jsonData))
-	println("data=%v", data)
+	fmt.Printf("data: %v\n", data)
+
 	binary.LittleEndian.PutUint32(data[0:4], uint32(length))
 	binary.LittleEndian.PutUint32(data[4:8], uint32(netCode))
 	copy(data[8:], jsonData)
 
+	fmt.Printf("data=%v",data)
 	_, err = client.conn.Write(data)
 	if err != nil {
 		logs.Error("Error sending data:", err)
+	} else {
+		fmt.Println("Data sent successfully")
 	}
 }
