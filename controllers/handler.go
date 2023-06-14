@@ -13,12 +13,15 @@ import (
 
 //var rm RoomManager
 
+//var matchQueue = &MatchQueue{}
+
 var netCode struct {
 	Value int `json:"value"`
 }
 
 func HandleRequest(client *Client) {
 	fmt.Println("HandleRequest")
+
 	for {
 		// 先读取长度
 		lengthBuf := make([]byte, 4)
@@ -41,13 +44,13 @@ func HandleRequest(client *Client) {
 		fmt.Println("netCode:", netCode)
 
 		// 读取消息，注意长度需要减去已经读取的netCode的长度
-		msgBuf := make([]byte, length)
+		msgBuf := make([]byte, length-4)
 		_, err = io.ReadFull(client.conn, msgBuf)
 		if err != nil {
 			logs.Error("read data body Error")
 			return
 		}
-
+		fmt.Println("debug_msgbuf")
 		fmt.Println("msgBuf=", string(msgBuf))
 
 		// 现在msgBuf就是完整的json数据，可以直接进行解析
@@ -59,7 +62,8 @@ func HandleRequest(client *Client) {
 		case common.ReqLogin:
 
 		case common.ReqRoomList:
-
+			fmt.Println("common.ReqRoomList")
+			GlobalRoomManager.AddToQueue(client)
 		case common.ReqJoinRoom:
 			// rm.PrintRooms()
 			// rm.Mutex.Lock()
@@ -90,7 +94,7 @@ func sendResponse(response interface{}, netCode int, client *Client) {
 	binary.LittleEndian.PutUint32(data[4:8], uint32(netCode))
 	copy(data[8:], jsonData)
 
-	fmt.Printf("data=%v",data)
+	fmt.Printf("data=%v", data)
 	_, err = client.conn.Write(data)
 	if err != nil {
 		logs.Error("Error sending data:", err)

@@ -3,6 +3,7 @@ package controllers
 import (
 	"database/sql"
 	"encoding/json"
+	"fmt"
 	"my_landlord/common"
 	"time"
 
@@ -15,14 +16,17 @@ var (
 
 // 可以直接传一个连接，也可以传一个buffer，待修改
 func Register(msg []byte, client *Client) {
+	//var LogInfo LogInfo
 	err := json.Unmarshal(msg, &LogInfo)
 	if err != nil {
 		logs.Error("Error parsing JSON:", err)
 		return
 	}
 
-	logs.Error("Account=%v", LogInfo.Account)
-	logs.Error("Password=%v", LogInfo.Password)
+	fmt.Printf("Account=%v\n", LogInfo.Account)
+	fmt.Printf("Password=%v\n", LogInfo.Password)
+
+	client.UserInfo.Username = LogInfo.Account
 
 	var username, password string
 	err = common.GameConfInfo.Db.QueryRow("SELECT username FROM account where username=?", LogInfo.Account).Scan(&username, &password)

@@ -2,6 +2,7 @@ package main
 
 import (
 	"my_landlord/controllers"
+
 	"github.com/astaxie/beego/logs"
 )
 
@@ -26,6 +27,8 @@ func main() {
 		logs.Error("init sec err:%v", err)
 		return
 	}
+
+	controllers.GlobalRoomManager = controllers.NewRoomManager() //初始化RoomManager
 
 	//client:=&service.Client{}
 	//无限循环来建立TCP连接?

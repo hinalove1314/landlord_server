@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 	"time"
-	"my_landlord/service"
+
 	"github.com/astaxie/beego/logs"
 )
 
@@ -23,9 +23,8 @@ const (
 
 type UserId int
 type UserInfo struct {
-	UserId   UserId `json:"user_id"`
-	Username string `json:"username"`
-	Coin     int    `json:"coin"`
+	UserId   UserId
+	Username string
 	Role     int
 }
 
@@ -35,8 +34,8 @@ type Client struct {
 	conn     net.Conn // TCP连接
 	addr     string   // 客户端地址
 	port     string   // 客户端端口
-	Room     *service.Room
-	Table    *service.Table
+	Room     *Room
+	Table    *Table
 }
 
 // 定义一个接收器，实现和客户端建立TCP连接的功能
@@ -64,7 +63,8 @@ func ConnectClient() {
 		fmt.Println("New client connected.")
 		//c.conn = conn // 连接成功，将conn赋值给c.conn
 		client := &Client{
-			conn: conn,
+			conn:     conn,
+			UserInfo: new(UserInfo),
 		}
 		go HandleRequest(client)
 	}
