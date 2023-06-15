@@ -77,14 +77,21 @@ func HandleRequest(client *Client) {
 func sendResponse(response interface{}, netCode int, client *Client) {
 	fmt.Println("sendResponse start")
 
-	jsonData, err := json.Marshal(response)
-	if err != nil {
-		logs.Error("Error marshalling JSON:", err)
-		return
+	var jsonData []byte
+	var err error
+
+	if response == nil {
+		jsonData = []byte("{}") // Use an empty JSON object if response is nil
+	} else {
+		jsonData, err = json.Marshal(response)
+		if err != nil {
+			logs.Error("Error marshalling JSON:", err)
+			return
+		}
 	}
 
 	// prepare the data to send
-	length := len(jsonData)
+	length := len(jsonData) + 4
 	fmt.Printf("length: %v\n", length)
 
 	data := make([]byte, 4+4+len(jsonData))

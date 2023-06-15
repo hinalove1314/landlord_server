@@ -47,6 +47,9 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 			state:   0,
 		}
 
+		// Send game start message to all clients in the room
+		room.sendGameStartMessage()
+
 		rm.rooms[rm.nextID] = room
 		rm.nextID++
 
@@ -60,4 +63,15 @@ func (rm *RoomManager) GetRoom(id int) (*Room, bool) {
 
 	room, ok := rm.rooms[id]
 	return room, ok
+}
+
+func (room *Room) sendGameStartMessage() {
+	// 在这里，你可能需要创建你的游戏开始消息，可能是一个结构体或者其他数据类型
+	// 这里假设你已经有了一个创建游戏开始消息的函数 createGameStartMessage()
+	// 该函数返回一个字节数组
+
+	// 然后，向房间中的所有用户发送游戏开始的消息
+	for _, client := range room.clients {
+		sendResponse(nil, 14, client)
+	}
 }
