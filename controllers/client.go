@@ -36,6 +36,8 @@ type Client struct {
 	port     string   // 客户端端口
 	Room     *Room
 	Table    *Table
+	SeatNum  int    //座位顺序
+	Hand     []Card // 玩家的手牌
 }
 
 // 定义一个接收器，实现和客户端建立TCP连接的功能

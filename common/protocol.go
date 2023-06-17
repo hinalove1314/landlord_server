@@ -22,8 +22,8 @@ const (
 	ReqNewTable = 21
 	ResNewTable = 22
 
-	ReqDealPoker = 31
-	ResDealPoker = 32
+	ReqDealCard = 31
+	ResDealCard = 32
 
 	ReqCallScore = 33
 	ResCallScore = 34

@@ -81,7 +81,7 @@ func sendResponse(response interface{}, netCode int, client *Client) {
 	var err error
 
 	if response == nil {
-		jsonData = []byte("{}") // Use an empty JSON object if response is nil
+		jsonData = []byte("") // Use an empty JSON object if response is nil
 	} else {
 		jsonData, err = json.Marshal(response)
 		if err != nil {
