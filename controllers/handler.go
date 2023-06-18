@@ -90,6 +90,9 @@ func sendResponse(response interface{}, netCode int, client *Client) {
 		}
 	}
 
+	fmt.Println("JSON data: ", string(jsonData)) // Print JSON data
+
+	//发送的是数据的总长度,即netcode长度+json字段长度
 	// prepare the data to send
 	length := len(jsonData) + 4
 	fmt.Printf("length: %v\n", length)

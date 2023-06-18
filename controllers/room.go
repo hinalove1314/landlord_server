@@ -52,7 +52,7 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 			state:   0,
 		}
 
-		// Send game start message to all clients in the room
+		// 发送开始游戏的消息
 		room.sendGameStartMessage()
 
 		rm.rooms[rm.nextID] = room
@@ -65,11 +65,14 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 		//打印玩家手牌信息
 		for _, client := range clients {
 			fmt.Printf("Player %s's hand: ", client.UserInfo.Username)
+			sendResponse(client.Hand,32,client)
 			for _, card := range client.Hand {
 				fmt.Printf("%s %s, ", card.Value, card.Suit)
 			}
 			fmt.Println()
 		}
+
+		
 	}
 }
 
