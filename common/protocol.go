@@ -19,8 +19,8 @@ const (
 	ReqJoinTable = 19
 	ResJoinTable = 20
 
-	ReqNewTable = 21
-	ResNewTable = 22
+	ReqSeatNum = 21
+	ResSeatNum = 22
 
 	ReqDealCard = 31
 	ResDealCard = 32

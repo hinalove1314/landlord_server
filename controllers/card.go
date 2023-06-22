@@ -1,11 +1,16 @@
 package controllers
 
 import (
+	"encoding/json"
 	"fmt"
 	"math/rand"
 	"sort"
 	"time"
+
+	"github.com/astaxie/beego/logs"
 )
+
+var roominfo RoomInfo
 
 type Card struct {
 	Value       string `json:"value"` // 储存牌的数值，如3,4,5...J,Q,K,A,2
@@ -40,10 +45,10 @@ func createAndShuffleDeck() Deck {
 		"big_joker":    15,
 	}
 	suits := map[string]int{
-		"Spades":   1,
-		"Hearts":   2,
-		"Diamonds": 3,
-		"Clubs":    4,
+		"Spades":   1, //黑桃
+		"Hearts":   2, //红心
+		"Diamonds": 3, //方块
+		"Clubs":    4, //梅花
 		"Joker":    5,
 	}
 	deck := make([]Card, 54)
@@ -100,4 +105,50 @@ func DealCards(room *Room, client []*Client) {
 
 	//剩余的三张牌作为地主牌
 	//client[0].LordCards = deck.LordCards
+}
+
+// 决定谁是地主
+func DealLord(msg []byte, room *Room, client *Client) {
+	fmt.Println("At the start of DealLord, room = ", room)
+
+	err := json.Unmarshal(msg, &roominfo)
+	if err != nil {
+		logs.Error("Error parsing JSON:", err)
+		return
+	}
+
+	fmt.Println("roomID=", roominfo.ID)
+	fmt.Println("isCalled=", roominfo.IsCalled)
+
+	if roominfo.IsCalled {
+		client.LordPoint += 3
+	}
+	fmt.Println("client.LordPoint=", client.LordPoint)
+
+	room.CallLordCount += 1 // 增加叫地主的客户数量,用来判断有几名用户叫地主了
+	// 假设房间里最初没有客户，LordPoint 最高的客户为 nil
+	if room.CallLordCount == len(room.clients) {
+		var maxLordPointClient *Client = nil
+
+		if room.clients == nil {
+			logs.Error("Room clients list is nil")
+			return
+		}
+
+		// 遍历房间里的所有客户
+		for _, c := range room.clients {
+			// 如果这是第一个客户，或者他的 LordPoint 比当前最高的还要高
+			if maxLordPointClient == nil || c.LordPoint > maxLordPointClient.LordPoint {
+				// 则更新最高 LordPoint 的客户
+				maxLordPointClient = c
+			}
+		}
+
+		// 打印最高 LordPoint 的客户信息
+		if maxLordPointClient != nil {
+			fmt.Println("The client with the highest LordPoint is:", maxLordPointClient.UserInfo.Username)
+		} else {
+			fmt.Println("There are no clients in the room.")
+		}
+	}
 }

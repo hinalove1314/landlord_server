@@ -3,15 +3,23 @@ package controllers
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 var GlobalRoomManager *RoomManager
+var lordnum = 2 //第一个玩家的叫地主分数
 
 type Room struct {
-	ID        int
-	clients   []*Client
-	state     int // 表示状态,0表示房间未满人，1表示房间满人
-	LordCards []Card
+	ID            int
+	clients       []*Client
+	state         int // 表示状态,0表示房间未满人，1表示房间满人
+	LordCards     []Card
+	CallLordCount int // 表示已经叫了地主的客户数量
+}
+
+type RoomInfo struct {
+	ID       int  `json:"RoomID"`
+	IsCalled bool `json:"isCalled"` //是否叫地主
 }
 
 type RoomManager struct {
@@ -51,12 +59,19 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 			clients: clients,
 			state:   0,
 		}
+		for _, c := range clients {
+			c.Room = room
+		}
+		fmt.Println("After assignment, client.Room = ", client.Room)
 
 		// 发送开始游戏的消息
 		room.sendGameStartMessage()
+		room.sendSeatNum() //发送客户端座位号
 
 		rm.rooms[rm.nextID] = room
 		rm.nextID++
+
+		time.Sleep(time.Second * 5)
 
 		fmt.Println("Created new room with ID: ", room.ID)
 
@@ -64,15 +79,17 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 
 		//打印玩家手牌信息
 		for _, client := range clients {
+			sendResponse(client.Hand, 32, client) //发送玩家手牌信息
+			//给客户端的LordPoint赋值
+			client.LordPoint = lordnum
+			lordnum--
 			fmt.Printf("Player %s's hand: ", client.UserInfo.Username)
-			sendResponse(client.Hand,32,client)
+			fmt.Println("Player's lordnum: ", client.LordPoint)
 			for _, card := range client.Hand {
 				fmt.Printf("%s %s, ", card.Value, card.Suit)
 			}
 			fmt.Println()
 		}
-
-		
 	}
 }
 
@@ -84,6 +101,7 @@ func (rm *RoomManager) GetRoom(id int) (*Room, bool) {
 	return room, ok
 }
 
+// 想想能不能提高复用性
 func (room *Room) sendGameStartMessage() {
 	// 在这里，你可能需要创建你的游戏开始消息，可能是一个结构体或者其他数据类型
 	// 这里假设你已经有了一个创建游戏开始消息的函数 createGameStartMessage()
@@ -91,6 +109,15 @@ func (room *Room) sendGameStartMessage() {
 	fmt.Println("sendGameStartMessage")
 	// 然后，向房间中的所有用户发送游戏开始的消息
 	for _, client := range room.clients {
-		sendResponse(nil, 14, client)
+		sendResponse(room.ID, 14, client)
+	}
+}
+
+// 发送座位号信息
+func (room *Room) sendSeatNum() {
+	fmt.Println("sendSeatNum")
+	// 然后，向房间中的所有用户发送游戏开始的消息
+	for _, client := range room.clients {
+		sendResponse(client.SeatNum, 22, client)
 	}
 }

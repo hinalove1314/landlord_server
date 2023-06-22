@@ -70,6 +70,9 @@ func HandleRequest(client *Client) {
 			// defer rm.Mutex.Unlock()
 			// rm.AddPlayer(int(client.UserInfo.UserId))
 			// rm.PrintRooms()
+		case common.ReqCallScore:
+			fmt.Println("common.ReqCallScore")
+			DealLord(msgBuf, client.Room, client)
 		}
 	}
 }
@@ -98,7 +101,6 @@ func sendResponse(response interface{}, netCode int, client *Client) {
 	fmt.Printf("length: %v\n", length)
 
 	data := make([]byte, 4+4+len(jsonData))
-	fmt.Printf("data: %v\n", data)
 
 	binary.LittleEndian.PutUint32(data[0:4], uint32(length))
 	binary.LittleEndian.PutUint32(data[4:8], uint32(netCode))

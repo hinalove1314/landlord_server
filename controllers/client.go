@@ -38,6 +38,8 @@ type Client struct {
 	Table    *Table
 	SeatNum  int    //座位顺序
 	Hand     []Card // 玩家的手牌
+	LordPoint int //地主分，初始第一个玩家分为2，第二个分为1，第三个分为0
+	IsLord int //是否是地主
 }
 
 // 定义一个接收器，实现和客户端建立TCP连接的功能
