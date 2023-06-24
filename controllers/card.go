@@ -150,5 +150,8 @@ func DealLord(msg []byte, room *Room, client *Client) {
 		} else {
 			fmt.Println("There are no clients in the room.")
 		}
+
+		room.sendInformation(maxLordPointClient.SeatNum, 36) //把成为地主的seatNum发送给客户端
+		room.sendInformation(room.LordCards, 38)             //发送地主牌消息
 	}
 }

@@ -28,11 +28,11 @@ const (
 	ReqCallScore = 33
 	ResCallScore = 34
 
-	ReqShowPoker = 35
-	ResShowPoker = 36
+	ReqDealLord = 35
+	ResDealLord = 36
 
-	ReqShotPoker = 37
-	ResShotPoker = 38
+	ReqDealLordCard = 37
+	ResDealLordCard = 38
 
 	ReqGameOver = 41
 	ResGameOver = 42

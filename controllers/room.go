@@ -66,9 +66,11 @@ func (rm *RoomManager) AddToQueue(client *Client) {
 
 		// 发送开始游戏的消息
 		room.sendGameStartMessage()
+		time.Sleep(time.Second * 1)
 		room.sendSeatNum() //发送客户端座位号
 
 		rm.rooms[rm.nextID] = room
+
 		rm.nextID++
 
 		time.Sleep(time.Second * 5)
@@ -119,5 +121,14 @@ func (room *Room) sendSeatNum() {
 	// 然后，向房间中的所有用户发送游戏开始的消息
 	for _, client := range room.clients {
 		sendResponse(client.SeatNum, 22, client)
+	}
+}
+
+// 发送座位号信息
+func (room *Room) sendInformation(info interface{}, code int) {
+	fmt.Println("sendInformation")
+	// 然后，向房间中的所有用户发送信息
+	for _, client := range room.clients {
+		sendResponse(info, code, client)
 	}
 }

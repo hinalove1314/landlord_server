@@ -1,0 +1,75 @@
+2023/06/23 09:34:16.381 [E]  read data head Error
+2023/06/23 09:34:37.040 [E]  read data head Error
+2023/06/23 09:34:42.087 [E]  read data head Error
+2023/06/23 09:35:11.276 [E]  read data head Error
+2023/06/23 09:35:21.975 [E]  read data head Error
+2023/06/23 09:43:39.508 [E]  read data head Error
+2023/06/23 09:43:49.017 [E]  read data head Error
+2023/06/23 09:43:58.339 [E]  read data head Error
+2023/06/23 09:46:41.426 [E]  read data head Error
+2023/06/23 09:46:49.427 [E]  read data head Error
+2023/06/23 09:46:54.303 [E]  read data head Error
+2023/06/23 09:47:51.263 [E]  read data head Error
+2023/06/23 13:18:57.537 [E]  read data head Error
+2023/06/23 13:18:59.134 [E]  read data head Error
+2023/06/23 13:19:38.637 [E]  read data head Error
+2023/06/23 13:19:50.503 [E]  read data head Error
+2023/06/23 13:20:06.876 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:53015: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/23 13:20:11.890 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:53015: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/23 13:21:11.505 [E]  read data head Error
+2023/06/23 13:21:15.134 [E]  read data head Error
+2023/06/23 13:21:17.797 [E]  read data head Error
+2023/06/23 13:35:07.046 [E]  read data head Error
+2023/06/23 13:35:17.415 [E]  read data head Error
+2023/06/23 13:35:26.032 [E]  read data head Error
+2023/06/23 13:35:28.001 [E]  read data head Error
+2023/06/23 13:36:55.774 [E]  read data head Error
+2023/06/23 13:37:04.527 [E]  read data head Error
+2023/06/23 13:37:12.563 [E]  read data head Error
+2023/06/23 13:38:48.874 [E]  read data head Error
+2023/06/23 13:38:59.884 [E]  read data head Error
+2023/06/23 13:39:04.538 [E]  read data head Error
+2023/06/23 14:17:04.966 [E]  read data head Error
+2023/06/23 14:17:17.919 [E]  read data head Error
+2023/06/23 14:17:28.120 [E]  read data head Error
+2023/06/23 14:18:04.524 [E]  read data head Error
+2023/06/23 14:19:38.420 [E]  read data head Error
+2023/06/23 14:19:42.752 [E]  read data head Error
+2023/06/23 14:19:47.190 [E]  read data head Error
+2023/06/23 14:20:05.857 [E]  read data head Error
+2023/06/23 14:20:12.355 [E]  read data head Error
+2023/06/23 14:20:14.381 [E]  read data head Error
+2023/06/23 14:20:28.773 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:58696: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/23 14:20:33.787 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:58696: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/23 14:20:48.356 [E]  read data head Error
+2023/06/23 14:20:58.139 [E]  read data head Error
+2023/06/23 14:21:43.630 [I]  init sec succ
+2023/06/23 14:23:09.098 [E]  read data head Error
+2023/06/23 14:23:20.173 [E]  read data head Error
+2023/06/23 14:23:31.854 [E]  read data head Error
+2023/06/23 14:36:10.161 [E]  read data head Error
+2023/06/23 17:35:43.181 [I]  init sec succ
+2023/06/23 17:38:11.528 [E]  read data head Error
+2023/06/23 17:38:19.740 [E]  read data head Error
+2023/06/23 17:41:58.623 [E]  read data head Error
+2023/06/23 17:41:59.909 [E]  read data head Error
+2023/06/23 17:42:04.094 [E]  read data head Error
+2023/06/23 17:53:06.151 [E]  read data head Error
+2023/06/23 17:53:12.900 [E]  read data head Error
+2023/06/23 17:53:19.362 [E]  read data head Error
+2023/06/23 17:54:32.084 [E]  read data head Error
+2023/06/23 17:54:34.610 [E]  read data head Error
+2023/06/23 17:54:37.021 [E]  read data head Error
+2023/06/23 17:59:19.650 [E]  read data head Error
+2023/06/23 17:59:25.978 [E]  read data head Error
+2023/06/23 17:59:32.165 [E]  read data head Error
+2023/06/23 18:03:36.684 [E]  read data head Error
+2023/06/23 18:03:49.778 [E]  read data head Error
+2023/06/23 18:04:02.531 [E]  read data head Error
+2023/06/23 18:09:08.221 [E]  read data head Error
+2023/06/23 18:09:14.751 [E]  read data head Error
+2023/06/23 18:09:20.468 [E]  read data head Error
+2023/06/23 18:09:29.293 [E]  read data head Error
+2023/06/23 18:14:31.445 [E]  read data head Error
+2023/06/23 18:14:37.051 [E]  read data head Error
+2023/06/23 18:14:48.288 [E]  read data head Error
