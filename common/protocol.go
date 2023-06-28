@@ -34,11 +34,11 @@ const (
 	ReqDealLordCard = 37
 	ResDealLordCard = 38
 
-	ReqGameOver = 41
-	ResGameOver = 42
+	ReqPlayCard = 41
+	ResPlayCard = 42
 
-	ReqChat = 43
-	ResChat = 44
+	ReqUnPlayCard = 43
+	ResUnPlayCard = 44
 
 	ReqRestart = 45
 	ResRestart = 46

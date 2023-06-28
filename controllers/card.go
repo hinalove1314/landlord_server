@@ -11,17 +11,69 @@ import (
 )
 
 var roominfo RoomInfo
+var playcard PlayCard
+var UnPlayCardNum = 0
 
 type Card struct {
-	Value       string `json:"value"` // 储存牌的数值，如3,4,5...J,Q,K,A,2
-	Suit        string `json:"suit"`  // 储存牌的花色，如Spades, Hearts, Diamonds, Clubs
-	ValueWeight int    // 储存牌的数值的排序权重
-	SuitWeight  int    // 储存牌的花色的排序权重
+	Value       string `json:"value"`       // 储存牌的数值，如3,4,5...J,Q,K,A,2
+	Suit        string `json:"suit"`        // 储存牌的花色，如Spades, Hearts, Diamonds, Clubs
+	ValueWeight int    `json:"ValueWeight"` // 储存牌的数值的排序权重
+	SuitWeight  int    `json:"SuitWeight"`  // 储存牌的花色的排序权重
 }
 
 type Deck struct {
 	Cards     []Card `json:"cards"`
 	LordCards []Card `json:"lord_cards"`
+}
+
+type PlayCard struct {
+	Cards []Card `json:"cards"`
+}
+
+// 接收出牌的数据，并把数据发送给发送客户端的下一个客户端
+func receivePlayCards(msg []byte, room *Room, client *Client) {
+	fmt.Println("client seatnum =", client.SeatNum)
+	err := json.Unmarshal(msg, &playcard)
+	if err != nil {
+		logs.Error("Error parsing JSON:", err)
+		return
+	}
+
+	fmt.Println("cardinfo=", playcard.Cards[0].Value)
+
+	if client.SeatNum < 3 {
+		sendResponse(playcard, 42, room.clients[client.SeatNum]) //把出牌数据发送给下一个客户端(因为client从0开始，seatNum从一开始，所以这里相当于+1了)
+	} else {
+		sendResponse(playcard, 42, room.clients[0]) //把出牌数据发送给第一个客户端
+	}
+}
+
+// 接收到不出的消息
+func UnreceivePlayCards(msg []byte, room *Room, client *Client) {
+	fmt.Println("client seatnum =", client.SeatNum)
+	err := json.Unmarshal(msg, &playcard)
+	if err != nil {
+		logs.Error("Error parsing JSON:", err)
+		return
+	}
+
+	fmt.Println("cardinfo=", playcard.Cards[0].Value)
+
+	UnPlayCardNum++
+
+	if client.SeatNum < 3 {
+		if UnPlayCardNum == 2 {
+			sendResponse(playcard, 44, room.clients[client.SeatNum]) //发送不出的消息，下一个客户端必须要出牌
+			UnPlayCardNum = 0
+		}
+		sendResponse(playcard, 42, room.clients[client.SeatNum]) //把出牌数据发送给下一个客户端(因为client从0开始，seatNum从一开始，所以这里相当于+1了)
+	} else {
+		if UnPlayCardNum == 2 {
+			sendResponse(playcard, 44, room.clients[0]) //把出牌数据发送给第一个客户端
+			UnPlayCardNum = 0
+		}
+		sendResponse(playcard, 42, room.clients[0]) //把出牌数据发送给第一个客户端
+	}
 }
 
 func createAndShuffleDeck() Deck {

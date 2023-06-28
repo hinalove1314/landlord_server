@@ -73,6 +73,10 @@ func HandleRequest(client *Client) {
 		case common.ReqCallScore:
 			fmt.Println("common.ReqCallScore")
 			DealLord(msgBuf, client.Room, client)
+		case common.ReqPlayCard:
+			receivePlayCards(msgBuf, client.Room, client)
+		case common.ReqUnPlayCard:
+			UnreceivePlayCards(msgBuf, client.Room, client)
 		}
 	}
 }
