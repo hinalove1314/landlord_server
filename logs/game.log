@@ -57,3 +57,59 @@
 2023/06/28 16:38:29.898 [E]  read data head Error
 2023/06/28 16:39:42.753 [E]  read data head Error
 2023/06/28 16:57:23.974 [E]  read data head Error
+2023/06/29 11:31:02.046 [I]  init sec succ
+2023/06/29 11:34:31.366 [E]  read data head Error
+2023/06/29 11:34:41.531 [E]  read data head Error
+2023/06/29 11:34:43.349 [E]  read data head Error
+2023/06/29 13:23:28.063 [E]  read data head Error
+2023/06/29 13:23:29.981 [E]  read data head Error
+2023/06/29 13:23:32.911 [E]  read data head Error
+2023/06/29 14:30:36.564 [E]  read data head Error
+2023/06/29 15:16:35.587 [E]  read data head Error
+2023/06/29 15:16:39.091 [E]  read data head Error
+2023/06/29 15:18:16.707 [E]  read data head Error
+2023/06/29 15:18:19.424 [E]  read data head Error
+2023/06/29 15:18:21.259 [E]  read data head Error
+2023/06/29 15:18:32.311 [E]  read data head Error
+2023/06/29 15:18:41.111 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65260: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:18:42.134 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65260: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:18:42.135 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65260: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:18:47.160 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65260: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:18:47.168 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65260: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:19:00.392 [E]  read data head Error
+2023/06/29 15:19:02.480 [E]  read data head Error
+2023/06/29 15:19:04.050 [E]  read data head Error
+2023/06/29 15:19:13.816 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65265: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:19:13.817 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65267: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:19:18.832 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65265: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:19:18.839 [E]  Error sending data: write tcp 127.0.0.1:8888->127.0.0.1:65267: wsasend: An established connection was aborted by the software in your host machine.
+2023/06/29 15:19:21.600 [E]  read data head Error
+2023/06/29 15:19:24.120 [E]  read data head Error
+2023/06/29 15:19:26.006 [E]  read data head Error
+2023/06/29 15:33:14.347 [E]  read data head Error
+2023/06/29 15:33:21.747 [E]  read data head Error
+2023/06/29 15:33:26.490 [E]  read data head Error
+2023/06/29 15:33:34.013 [E]  read data head Error
+2023/06/29 15:35:57.460 [I]  init sec succ
+2023/06/29 15:38:17.456 [I]  init sec succ
+2023/06/29 16:03:02.620 [I]  init sec succ
+2023/06/29 16:07:38.153 [E]  read data head Error
+2023/06/29 16:07:45.385 [E]  read data head Error
+2023/06/29 16:07:51.480 [E]  read data head Error
+2023/06/29 16:10:40.239 [E]  read data head Error
+2023/06/29 16:10:42.996 [E]  read data head Error
+2023/06/29 16:10:56.085 [E]  read data head Error
+2023/06/29 16:10:58.880 [E]  read data head Error
+2023/06/29 16:11:02.089 [E]  read data head Error
+2023/06/29 16:20:59.211 [E]  read data head Error
+2023/06/29 16:21:30.973 [I]  init sec succ
+2023/06/29 16:27:37.559 [E]  read data head Error
+2023/06/29 16:27:47.575 [E]  read data head Error
+2023/06/29 16:27:52.785 [E]  read data head Error
+2023/06/29 16:32:00.692 [E]  read data head Error
+2023/06/29 16:32:09.612 [E]  read data head Error
+2023/06/29 16:32:11.676 [E]  read data head Error
+2023/06/29 16:32:13.959 [E]  read data head Error
+2023/06/29 16:33:33.499 [E]  read data head Error
+2023/06/29 16:33:36.684 [E]  read data head Error
+2023/06/29 16:33:40.267 [E]  read data head Error

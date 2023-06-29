@@ -12,6 +12,7 @@ import (
 
 var roominfo RoomInfo
 var playcard PlayCard
+var playerInfo PlayerInfo
 var UnPlayCardNum = 0
 
 type Card struct {
@@ -30,21 +31,30 @@ type PlayCard struct {
 	Cards []Card `json:"cards"`
 }
 
+type PlayerInfo struct {
+	SeatNum   int    `json:"seatNum"`
+	CardNum   int    `json:"cardNum"`
+	PlayCards []Card `json:"playCards"`
+}
+
 // 接收出牌的数据，并把数据发送给发送客户端的下一个客户端
 func receivePlayCards(msg []byte, room *Room, client *Client) {
 	fmt.Println("client seatnum =", client.SeatNum)
-	err := json.Unmarshal(msg, &playcard)
+	err := json.Unmarshal(msg, &playerInfo)
 	if err != nil {
 		logs.Error("Error parsing JSON:", err)
 		return
 	}
 
-	fmt.Println("cardinfo=", playcard.Cards[0].Value)
+	fmt.Println("cardinfo=", playerInfo.PlayCards[0].Value)
+	if len(playerInfo.PlayCards) == 0 {
+		fmt.Println("PlayCards is empty or null")
+	}
 
 	if client.SeatNum < 3 {
-		sendResponse(playcard, 42, room.clients[client.SeatNum]) //把出牌数据发送给下一个客户端(因为client从0开始，seatNum从一开始，所以这里相当于+1了)
+		sendResponse(playerInfo, 42, room.clients[client.SeatNum]) //把出牌数据发送给下一个客户端(因为client从0开始，seatNum从一开始，所以这里相当于+1了)
 	} else {
-		sendResponse(playcard, 42, room.clients[0]) //把出牌数据发送给第一个客户端
+		sendResponse(playerInfo, 42, room.clients[0]) //把出牌数据发送给第一个客户端
 	}
 }
 
