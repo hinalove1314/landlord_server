@@ -38,7 +38,7 @@ type PlayerInfo struct {
 }
 
 // 接收出牌的数据，并把数据发送给发送客户端的下一个客户端
-func receivePlayCards(msg []byte, room *Room, client *Client) {
+func receivePlayCardsInfo(msg []byte, room *Room, client *Client) {
 	fmt.Println("client seatnum =", client.SeatNum)
 	err := json.Unmarshal(msg, &playerInfo)
 	if err != nil {
@@ -51,15 +51,29 @@ func receivePlayCards(msg []byte, room *Room, client *Client) {
 		fmt.Println("PlayCards is empty or null")
 	}
 
+	//发送出牌数据来比较
 	if client.SeatNum < 3 {
 		sendResponse(playerInfo, 42, room.clients[client.SeatNum]) //把出牌数据发送给下一个客户端(因为client从0开始，seatNum从一开始，所以这里相当于+1了)
 	} else {
 		sendResponse(playerInfo, 42, room.clients[0]) //把出牌数据发送给第一个客户端
 	}
+
+	//发送出牌数据来显示
+	if client.SeatNum == 1 {
+		sendResponse(playerInfo, 46, room.clients[1])
+		sendResponse(playerInfo, 46, room.clients[2])
+	} else if client.SeatNum == 2 {
+		sendResponse(playerInfo, 46, room.clients[2])
+		sendResponse(playerInfo, 46, room.clients[0])
+	} else {
+		sendResponse(playerInfo, 46, room.clients[0])
+		sendResponse(playerInfo, 46, room.clients[1])
+	}
+
 }
 
 // 接收到不出的消息
-func UnreceivePlayCards(msg []byte, room *Room, client *Client) {
+func UnreceivePlayCardsInfo(msg []byte, room *Room, client *Client) {
 	fmt.Println("client seatnum =", client.SeatNum)
 	err := json.Unmarshal(msg, &playcard)
 	if err != nil {

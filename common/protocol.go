@@ -40,6 +40,6 @@ const (
 	ReqUnPlayCard = 43
 	ResUnPlayCard = 44
 
-	ReqRestart = 45
-	ResRestart = 46
+	ReqShowOtherCard = 45
+	ResShowOtherCard = 46
 )
